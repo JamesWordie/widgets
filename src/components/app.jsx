@@ -1,5 +1,6 @@
 import React from 'react';
 import Accordion from './accordion';
+import Search from './search';
 
 // class App extends React.Component {
 //   render() {
@@ -37,7 +38,8 @@ const items = [
 export default () => {
   return (
     <div className="container my-5">
-      <Accordion items={items} />
+      {/*<Accordion items={items} />*/}
+      <Search />
     </div>
   )
 };
