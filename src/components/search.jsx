@@ -3,8 +3,20 @@ import axios from 'axios';
 
 
 const Search = () => {
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState("cars");
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
+
+  // debouncing action to prevent immediate search's
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
 
   useEffect(() => {
     const search = async () => {
@@ -14,25 +26,48 @@ const Search = () => {
           list: 'search',
           origin: '*',
           format: 'json',
-          srsearch: term
+          srsearch: debouncedTerm
         }
       });
 
       setResults(data.query.search);
     };
 
-    const timerId = setTimeout(() => {
-      if (term) {
-        search();
-      };
-    }, 500);
+    search();
+  }, [debouncedTerm]);
 
-    // this arrow function CLEANUP is called first before it starting running code above
-    // has to be an arrow function
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [term]);
+  // old useEffect where you get a warning realting to results.length being a missing dependancy
+
+  // useEffect(() => {
+  //   const search = async () => {
+  //     const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+  //       params: {
+  //         action: 'query',
+  //         list: 'search',
+  //         origin: '*',
+  //         format: 'json',
+  //         srsearch: term
+  //       }
+  //     });
+
+  //     setResults(data.query.search);
+  //   };
+  //   if (term && !results.length) {
+  //     search();
+  //   } else {
+  //     const timerId = setTimeout(() => {
+  //       if (term) {
+  //         search();
+  //       };
+  //     }, 500);
+
+  //     // this arrow function CLEANUP is called first before it starting running code above
+  //     // has to be an arrow function
+  //     return () => {
+  //       clearTimeout(timerId);
+  //     };
+  //   };
+  // }, [term]);
 
   const renderedResults = results.map((res) => {
     return (
@@ -40,7 +75,8 @@ const Search = () => {
         <div className="card-body">
           <div className="">
             <a href={`https://en.wikipedia.org?curid=${res.pageid}`}
-               className="text-success float-end" target='_blank'>
+               className="text-success float-end" target='_blank'
+               rel="noreferrer">
                <i className="fas fa-link"></i>
             </a>
           </div>
