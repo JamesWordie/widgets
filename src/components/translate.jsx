@@ -14,6 +14,14 @@ const options = [
   {
     label: 'Arabic',
     value: 'ar'
+  },
+  {
+    label: 'Dutch',
+    value: 'nl'
+  },
+  {
+    label: 'French',
+    value: 'fr'
   }
 ];
 
