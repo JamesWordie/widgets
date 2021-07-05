@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 // import Accordion from './accordion';
 // import Search from './search';
-import Dropdown from './dropdown';
+// import Dropdown from './dropdown';
+import Translate from './translate';
 
 // class App extends React.Component {
 //   render() {
@@ -36,37 +37,34 @@ import Dropdown from './dropdown';
 //   }
 // ];
 
-const options = [
-  {
-    label: 'A Touch of Red',
-    value: 'red'
-  },
-  {
-    label: 'A Hint of Green',
-    value: 'green'
-  },
-  {
-    label: 'A Shade of Blue',
-    value: 'blue'
-  }
-]
+// const options = [
+//   {
+//     label: 'A Touch of Red',
+//     value: 'red'
+//   },
+//   {
+//     label: 'A Hint of Green',
+//     value: 'green'
+//   },
+//   {
+//     label: 'A Shade of Blue',
+//     value: 'blue'
+//   }
+// ]
 
 const App = () => {
-  const [selected, setSelected] = useState(options[0]);
-  const [showDropdown, setShowDropdown] = useState(true);
+  // const [selected, setSelected] = useState(options[0]);
 
   return (
     <div className="container my-5">
       {/*<Accordion items={items} />*/}
       {/*<Search />*/}
-      <button className="btn btn-info my-5" onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
-      {showDropdown ?
-        <Dropdown
-          selected={selected}
-          onSelectedChange={setSelected}
-          options={options}
-        /> : null
-      }
+{/*      <Dropdown
+        label="Pick a Colour"
+        selected={selected}
+        onSelectedChange={setSelected}
+        options={options}
+      />
       <div>
         <h1 style={{ color: `${selected.value}` }}>
           Lorem, ipsum dolor, sit amet consectetur adipisicing elit.
@@ -74,7 +72,8 @@ const App = () => {
           temporibus accusantium sint minima necessitatibus alias dolores
           incidunt molestias voluptatem voluptate nesciunt.
         </h1>
-      </div>
+      </div>*/}
+      <Translate />
     </div>
   )
 };
