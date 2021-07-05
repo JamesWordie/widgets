@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import Accordion from './accordion';
 // import Search from './search';
 import Dropdown from './dropdown';
@@ -52,11 +52,29 @@ const options = [
 ]
 
 const App = () => {
+  const [selected, setSelected] = useState(options[0]);
+  const [showDropdown, setShowDropdown] = useState(true);
+
   return (
     <div className="container my-5">
       {/*<Accordion items={items} />*/}
       {/*<Search />*/}
-      <Dropdown options={options} />
+      <button className="btn btn-info my-5" onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
+      {showDropdown ?
+        <Dropdown
+          selected={selected}
+          onSelectedChange={setSelected}
+          options={options}
+        /> : null
+      }
+      <div>
+        <h1 style={{ color: `${selected.value}` }}>
+          Lorem, ipsum dolor, sit amet consectetur adipisicing elit.
+          Amet illum dolor aliquam, praesentium non nihil veniam error optio
+          temporibus accusantium sint minima necessitatibus alias dolores
+          incidunt molestias voluptatem voluptate nesciunt.
+        </h1>
+      </div>
     </div>
   )
 };
