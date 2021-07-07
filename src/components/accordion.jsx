@@ -8,7 +8,6 @@ const Accordion = ({ items }) => {
 
   const onTitleClicked = (index) => {
     setActiveIndex(index);
-    // console.log('Title clicked', index)
   };
 
   const renderedItems = items.map((item, index) => {
@@ -16,19 +15,19 @@ const Accordion = ({ items }) => {
 
     return (
       <div className="accordion-item" key={item.title}>
-        <h2 className="accordion-header" id="headingOne" onClick={() => onTitleClicked(index)} >
-          <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <h2 className="accordion-header" id={`heading${index}`} onClick={() => onTitleClicked(index)} >
+          <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${index}`} aria-expanded="true" aria-controls={`collapse${index}`}>
             {item.title}
           </button>
         </h2>
-        <div id="collapseOne" className={`accordion-collapse collapse ${show}`} aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div id={`collapse${index}`} className={`accordion-collapse collapse ${show}`} aria-labelledby={`heading${index}`} data-bs-parent="#accordionExample">
           <div className="accordion-body">
             {item.content}
           </div>
         </div>
       </div>
     );
-  })
+  });
 
   return (
     <div className="accordion" id="accordionExample">
