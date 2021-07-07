@@ -4,6 +4,7 @@ import Search from './search';
 import Dropdown from './dropdown';
 import Translate from './translate';
 import Route from './route';
+import Header from './header';
 
 // class App extends React.Component {
 //   render() {
@@ -58,6 +59,7 @@ const App = () => {
 
   return (
     <div className="container my-5">
+      <Header />
       <Route path='/'>
         <Accordion items={items} />
       </Route>
